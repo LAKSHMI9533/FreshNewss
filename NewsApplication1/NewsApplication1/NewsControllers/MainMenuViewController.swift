@@ -16,46 +16,31 @@ class MainMenuViewController : UIViewController{
     @IBOutlet var MenuTableView: UITableView!
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//            let position = touch.location(in: self.view)
-//                print(position.x)
-//                print(position.y)
-//            }
         if let touch = touches.first {
             let position = touch.location(in:.none)
                 print(position.x)
                 print(position.y)
             }
     }
-    
-    @IBAction func TapGestertapped(_ sender: Any) {
-        print("menu")
-        
-    }
-    
-    
+     
     @IBAction func closeButtonAction(_ sender: Any) {
         dismiss(animated: false)
     }
+    
     override func viewDidLoad() {
-//        MenuTableView.frame.size.height = 10
-//        MenuTableView.frame.size.width =  200
-        
         let transition = CATransition()
         transition.duration = 2
         transition.type = CATransitionType.reveal
         transition.subtype = CATransitionSubtype.fromRight
         transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
         self.view.layer.add(transition, forKey: kCATransition)
-        
-        
+
         MenuTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
         MenuTableView.delegate = self
         MenuTableView.dataSource = self
     }
     override func updateViewConstraints() {
         self.view.frame.size.width = UIScreen.main.bounds.width/2
-        //self.view.frame.origin.y =  130
         self.view.layer.cornerRadius = 7
         self.view.layer.borderWidth = 1
         super.updateViewConstraints()
@@ -68,7 +53,7 @@ extension MainMenuViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = MenuTableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
+        let cell = MenuTableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
         cell.menuItemLabel.text = menuArray[indexPath.row]
         return cell
     }

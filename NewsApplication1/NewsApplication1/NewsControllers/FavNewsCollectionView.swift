@@ -24,8 +24,7 @@ class FavNewsCollectionViewController: UIViewController{
         favNewsCollection.dataSource = self
         favNewsCollection.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         for i in 0...FavArray.count-1{
-            print(i,"sdf")
-            var a = networking.addingCatToUrl(category: categoryEnum.allCases[i])
+            let a = networking.addingCatToUrl(category: categoryEnum.allCases[i])
             ApiCall(urll: a)
         }
     }
@@ -36,22 +35,17 @@ class FavNewsCollectionViewController: UIViewController{
                 print(error)
             } receiveValue: { decodedResponce1 in
                 self.favDecodedResponce = decodedResponce1
-//                DispatchQueue.main.async {
-//                  //  self.favNewsCollection.reloadData()
-//                }
             }.store(in: &can)
         } else {
             networking.apiCall(catApiUrl: urll).sink { error in
                 print(error)
             } receiveValue: { [self] decodedResponce1 in
-                if self.arrayforfav == nil {
-                    self.arrayforfav = []
-                }
+ 
                 self.arrayforfav.append(decodedResponce1)
                 self.arrayforfav1.append(contentsOf: decodedResponce1.articles)
                 if arrayforfav.count == FavArray.count{
                     DispatchQueue.main.async {
-                        favNewsCollection.reloadData()
+                        self.favNewsCollection.reloadData()
                     }
                 }
             }.store(in: &can)
@@ -68,20 +62,16 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
         } else {
             return arrayforfav1.count
         }
-        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = favNewsCollection.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        cell.titleLabel.text = "gh"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        
         let cell = cell as! CollectionViewCell
-        
         var activityView: UIActivityIndicatorView?
         activityView = UIActivityIndicatorView(style: .large)
         activityView?.frame = cell.imageView.bounds
@@ -121,7 +111,6 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(arrayforfav1[indexPath.row].url)
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "webViewController") as! WebViewController
         vc.urlForNews = "\((arrayforfav1[indexPath.row].url ?? "notfound url") as String)"

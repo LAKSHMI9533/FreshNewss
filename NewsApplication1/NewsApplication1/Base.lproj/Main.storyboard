@@ -135,7 +135,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="839-O4-VnL" customClass="CategoryCollectionViewCell" customModule="NewsApplication1" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="839-O4-VnL" customClass="CategoryCollectionViewCell" customModule="NewsApplication1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="4.666666666666667" width="146" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="VpS-XN-5DQ">
@@ -207,15 +207,9 @@
                         <outlet property="homeButton" destination="uEr-qK-aMQ" id="nsq-fv-2EW"/>
                         <outlet property="searchButton" destination="kbO-h8-iap" id="csX-yb-pQa"/>
                         <outlet property="searchTextField" destination="BeS-ix-qba" id="1LM-9l-I51"/>
-                        <outlet property="tapGester" destination="80L-s9-SAO" id="4x1-hd-U1Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="80L-s9-SAO">
-                    <connections>
-                        <action selector="tapGesterclicked:" destination="BYZ-38-t0r" id="qU5-Hh-oZC"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-752" y="-782"/>
         </scene>
@@ -260,24 +254,15 @@
                             <constraint firstItem="McL-IL-6sd" firstAttribute="leading" secondItem="ZJG-tf-JWr" secondAttribute="leading" constant="10" id="vgy-wc-C01"/>
                             <constraint firstItem="3YQ-qM-CSV" firstAttribute="top" secondItem="ZJG-tf-JWr" secondAttribute="top" constant="44" id="zts-y5-agk"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Pi9-0m-Cgs" appends="YES" id="Rax-lO-VZa"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Pk7-vb-ce7"/>
                     <size key="freeformSize" width="393" height="852"/>
                     <connections>
                         <outlet property="MenuTableView" destination="7Pe-3V-VuZ" id="7Zy-sa-CLi"/>
                         <outlet property="closeButton" destination="3YQ-qM-CSV" id="H6Y-Vn-ybd"/>
-                        <outlet property="tapGester" destination="Pi9-0m-Cgs" id="F50-Pt-InE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qp9-Am-zYQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Pi9-0m-Cgs">
-                    <connections>
-                        <action selector="TapGestertapped:" destination="dX3-Nn-0Gg" id="jGh-mX-Re4"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="533.58778625954199" y="-94.366197183098592"/>
         </scene>

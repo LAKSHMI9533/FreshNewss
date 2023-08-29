@@ -18,7 +18,7 @@ class Networking{
     var keys = "389c661b7e474bb58d0c4b149f57533b,hulk,ef8d6b5fdee84cc6afcfd3b93b4f634b,madhu"
     
     var  baseUrl = URL(string: "https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com,bbc.com&apiKey=ef8d6b5fdee84cc6afcfd3b93b4f634b&pageSize=100&language=en")
-    
+    var baseUrlString = "https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com,bbc.com&apiKey=ef8d6b5fdee84cc6afcfd3b93b4f634b&pageSize=100&language=en"
     var second  = "https://newsdata.io/api/1/news?apikey=pub_280928dc2d16bb16f2f5a3df3e0f4a7c3877c&country=in&language=en&category="
 
     func addingCatToUrl( category : categoryEnum)->String{
@@ -48,6 +48,8 @@ class Networking{
         case .general:
             let q = a + "general"
             return q
+        case .All:
+            return baseUrlString
         }
         return ""
     }

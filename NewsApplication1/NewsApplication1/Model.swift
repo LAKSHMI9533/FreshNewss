@@ -27,7 +27,7 @@ struct results : Codable{
 
 
 enum categoryEnum : Int, CaseIterable{
-    case general = 0,business,
+    case All = 0,general,business,
          entertainment,
          health,
          politics,
@@ -35,40 +35,11 @@ enum categoryEnum : Int, CaseIterable{
          sports,
          technology
          
-    
-//    var title: String {
-//        switch self {
-//        case .business:
-//            return "business"
-//        case .entertainment:
-//            <#code#>
-//        case .environment:
-//            <#code#>
-//        case .food:
-//            <#code#>
-//        case .health:
-//            <#code#>
-//        case .politics:
-//            <#code#>
-//        case .science:
-//            <#code#>
-//        case .sports:
-//            <#code#>
-//        case .technology:
-//            <#code#>
-//        case .top:
-//            <#code#>
-//        case .tourism:
-//            <#code#>
-//        case .world:
-//            <#code#>
-//        }
-//    }
 }
 
 var menuArray = ["Profile","languge","country"]
 
-var categoryArray = ["general","business","entertainment",
+var categoryArray = ["All","general","business","entertainment",
                      "health",
                      "politics",
                      "science",

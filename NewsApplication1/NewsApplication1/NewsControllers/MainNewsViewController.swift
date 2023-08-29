@@ -10,7 +10,6 @@ import Combine
 
 class MainNewsViewController: UIViewController {
     
-    @IBOutlet var tapGester: UITapGestureRecognizer!
     @IBOutlet var categoryCollectionView: UICollectionView!
     @IBOutlet var appNameLabel: UILabel!
     @IBOutlet var NewsCollectionView: UICollectionView!
@@ -25,6 +24,7 @@ class MainNewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ApiCall()
         searchTextField.layer.borderWidth = 1
         searchTextField.layer.cornerRadius = 5
         categoryCollectionView.delegate = self
@@ -33,17 +33,12 @@ class MainNewsViewController: UIViewController {
         NewsCollectionView.dataSource = self
         NewsCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
     }
-    @IBAction func tapGesterclicked(_ sender: Any) {
-        print("mainviewcontroller")
-    }
+
     @IBAction func MenuButtonClicked(_ sender: Any) {
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "TableViewCell")
-        
         self.present(vc, animated: false, completion: nil)
-        
-        
     }
     
     @IBAction func SearchButtonClicked(_ sender: Any) {
@@ -66,7 +61,7 @@ class MainNewsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        ApiCall()
+        //ApiCall()
     }
     
     
@@ -118,8 +113,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             return cell
         }else{
             let cell = NewsCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-            cell.imageView.image = UIImage(named: "math-83288")
-            
+            //cell.imageView.image = UIImage(named: "math-83288")
             return cell
         }
         
@@ -154,7 +148,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
                 
                 cell.descriptionLabel.text = "\(decodedResponce.articles[indexPath.row].description ?? "data not found ")"
                 cell.titleLabel.text = "\(decodedResponce.articles[indexPath.row].title ?? "data not found")"
-                cell.contentLabel.text = "\(decodedResponce.articles[indexPath.row].content ?? "data not found come")\n\n PublishedAt  :       \((decodedResponce.articles[indexPath.row].publishedAt ?? "") as String ?? "")\n Author   :  \((decodedResponce.articles[indexPath.row].author ?? "") as String ?? "")"
+                cell.contentLabel.text = "\(decodedResponce.articles[indexPath.row].content ?? "data not found come")\n\n PublishedAt  :       \((decodedResponce.articles[indexPath.row].publishedAt ?? "") as String )\n Author   :  \((decodedResponce.articles[indexPath.row].author ?? "") as String )"
                 
                 if decodedResponce.articles[indexPath.row].urlToImage != nil {
                     DispatchQueue.main.async {
@@ -175,17 +169,13 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             }
         }
     }
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-//
-    
+  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView{
             let cell = collectionView.cellForItem(at: indexPath) as! CategoryCollectionViewCell
             
             if cell != prev{
-                if let p = prev{
+                if let temp = prev{
                     prev.backgroundColor = nil
                 }
                 cell.backgroundColor = .brown
@@ -205,8 +195,8 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
                     cell.backgroundColor = .blue
                 }
                 prev = cell
-                var a = networking.addingCatToUrl(category: categoryEnum.allCases[indexPath.row])
-                ApiCall(urll: a)
+                let urlForCategory = networking.addingCatToUrl(category: categoryEnum.allCases[indexPath.row])
+                ApiCall(urll: urlForCategory)
                 
             }else{
 //                cell.backgroundColor = nil
@@ -227,7 +217,6 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
 }
 extension MainNewsViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("layout")
             let itemWidth = collectionView.bounds.width
             let itemHeight = collectionView.bounds.height
             return CGSize(width: itemWidth, height: itemHeight)
