@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D5C54F52A9DCF99008326BD /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C54F42A9DCF99008326BD /* LanguageViewController.swift */; };
 		981CBE632A9B5FEF0005B1F8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CBE622A9B5FEF0005B1F8 /* WebViewController.swift */; };
 		981CBE682A9B778E0005B1F8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CBE662A9B778E0005B1F8 /* TableViewCell.swift */; };
 		981CBE692A9B778E0005B1F8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981CBE672A9B778E0005B1F8 /* TableViewCell.xib */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D5C54F42A9DCF99008326BD /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		981CBE622A9B5FEF0005B1F8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		981CBE662A9B778E0005B1F8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		981CBE672A9B778E0005B1F8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				981CBE672A9B778E0005B1F8 /* TableViewCell.xib */,
 				9838A3932A95FB6400C687D3 /* CollectionViewCell.swift */,
 				9838A3942A95FB6400C687D3 /* CollectionViewCell.xib */,
+				5D5C54F42A9DCF99008326BD /* LanguageViewController.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				9838A3952A95FB6400C687D3 /* CollectionViewCell.swift in Sources */,
 				9838A39C2A9734EB00C687D3 /* FavCollectionViewModel.swift in Sources */,
 				9838A39E2A973C9100C687D3 /* HomeViewController.swift in Sources */,
+				5D5C54F52A9DCF99008326BD /* LanguageViewController.swift in Sources */,
 				9838A3A02A9781EB00C687D3 /* MainNewsViewModel.swift in Sources */,
 				9838A3902A95E6EB00C687D3 /* Model.swift in Sources */,
 				98C662392A95DC0F00F4C163 /* SceneDelegate.swift in Sources */,
