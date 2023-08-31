@@ -25,8 +25,10 @@ class MainNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ApiCall()
+        let myColor : UIColor = UIColor.white
+        searchTextField.layer.borderColor = myColor.cgColor
         searchTextField.layer.borderWidth = 1
-        searchTextField.layer.cornerRadius = 5
+        searchTextField.layer.cornerRadius = 15
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource=self
         NewsCollectionView.delegate = self
@@ -52,10 +54,10 @@ class MainNewsViewController: UIViewController {
         print("rotated")
         if UIDevice.current.orientation.isLandscape{
             print("landscape")
-                // NewsCollectionView.reloadData()
+                viewDidLoad()
         }else{
             print("potrait")
-                //NewsCollectionView.reloadData()
+                viewDidLoad()
         }
         
     }

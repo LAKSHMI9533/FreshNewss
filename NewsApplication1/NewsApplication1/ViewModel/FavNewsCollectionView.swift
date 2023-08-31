@@ -71,6 +71,11 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
+        
+        cell.layer.cornerRadius = 7
+        cell.layer.borderWidth = 1
+        
+        
         let cell = cell as! CollectionViewCell
         var activityView: UIActivityIndicatorView?
         activityView = UIActivityIndicatorView(style: .large)
@@ -124,7 +129,7 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
 
 extension FavNewsCollectionViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let itemWidth = collectionView.bounds.width
+            let itemWidth = collectionView.bounds.width - 10
             let itemHeight = collectionView.bounds.height
             return CGSize(width: itemWidth, height: itemHeight)
         }
