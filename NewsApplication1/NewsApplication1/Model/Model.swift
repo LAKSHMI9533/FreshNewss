@@ -37,7 +37,7 @@ enum categoryEnum : Int, CaseIterable{
          
 }
 
-var menuArray = ["Profile","languge","country"]
+var menuArray = ["View Profile","Contact Us","Log Out"]
 
 var categoryArray = ["All","general","business","entertainment",
                      "health",
@@ -47,8 +47,7 @@ var categoryArray = ["All","general","business","entertainment",
                      "technology",
                      ]
 
-var FavArray = ["business","entertainment","environment",
-                     "food"]
+var FavArray = ["business","entertainment"]
 
 var searchUrl = "https://newsapi.org/v2/everything?apiKey=ef8d6b5fdee84cc6afcfd3b93b4f634b&q="
 
