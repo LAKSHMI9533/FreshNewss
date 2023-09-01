@@ -28,12 +28,16 @@ class MainMenuViewController : UIViewController{
     }
     
     override func viewDidLoad() {
-        let transition = CATransition()
-        transition.duration = 2
-        transition.type = CATransitionType.reveal
-        transition.subtype = CATransitionSubtype.fromRight
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        self.view.layer.add(transition, forKey: kCATransition)
+        let userEntity1 = Entity(context: PersistentStorage.shared.persistentContainer.viewContext)
+        userEntity1.favArray = FavArray as NSObject
+        PersistentStorage.shared.saveContext()
+        print(userEntity1.favArray as! [ String])
+        //        let transition = CATransition()
+//        transition.duration = 2
+//        transition.type = CATransitionType.reveal
+//        transition.subtype = CATransitionSubtype.fromRight
+//        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+//        self.view.layer.add(transition, forKey: kCATransition)
 
         MenuTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
         MenuTableView.delegate = self
@@ -56,6 +60,30 @@ extension MainMenuViewController:UITableViewDelegate,UITableViewDataSource{
         let cell = MenuTableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
         cell.menuItemLabel.text = menuArray[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if menuArray[indexPath.row] == "View Profile" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let pc = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
+            self.present(pc, animated: true)
+        } else if menuArray[indexPath.row] == "Contact Us" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let pc = storyboard.instantiateViewController(withIdentifier: "ContactUsVC")
+            self.present(pc, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to Log out?", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+                print("log out")
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true)
+        }
+        
+        MenuTableView.deselectRow(at: indexPath, animated: true)
     }
     
     
