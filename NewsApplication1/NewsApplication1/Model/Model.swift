@@ -39,13 +39,7 @@ enum categoryEnum : Int, CaseIterable{
 
 var menuArray = ["View Profile","Contact Us","Log Out"]
 
-var categoryArray = ["All","general","business","entertainment",
-                     "health",
-                     "politics",
-                     "science",
-                     "sports",
-                     "technology",
-                     ]
+var categoryArray = ["All","general","business","entertainment","health","politics", "science","sports","technology"]
 
 var FavArray = ["business","entertainment"]
 

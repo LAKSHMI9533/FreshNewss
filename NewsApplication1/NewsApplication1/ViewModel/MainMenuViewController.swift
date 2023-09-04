@@ -10,8 +10,8 @@ import UIKit
 
 class MainMenuViewController : UIViewController{
     
+    @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var closeButton: UIButton!
-    
     @IBOutlet var tapGester: UITapGestureRecognizer!
     @IBOutlet var MenuTableView: UITableView!
     
@@ -32,7 +32,8 @@ class MainMenuViewController : UIViewController{
         userEntity1.favArray = FavArray as NSObject
         PersistentStorage.shared.saveContext()
         print(userEntity1.favArray as! [ String])
-        //        let transition = CATransition()
+        MenuTableView.rowHeight = MenuTableView.bounds.height/9
+        //        let transition = CATransition(8
 //        transition.duration = 2
 //        transition.type = CATransitionType.reveal
 //        transition.subtype = CATransitionSubtype.fromRight

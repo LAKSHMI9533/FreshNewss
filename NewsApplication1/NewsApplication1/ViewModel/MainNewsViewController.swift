@@ -27,7 +27,8 @@ class MainNewsViewController: UIViewController {
         ApiCall()
         let myColor : UIColor = UIColor.white
         searchTextField.layer.borderColor = myColor.cgColor
-        searchTextField.layer.borderWidth = 1
+        searchTextField.layer.borderWidth = 2
+        searchTextField.layer.borderColor = UIColor.black.cgColor
         searchTextField.layer.cornerRadius = 15
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource=self
@@ -219,8 +220,13 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
 }
 extension MainNewsViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let itemWidth = collectionView.bounds.width
-            let itemHeight = collectionView.bounds.height
+        var itemWidth = collectionView.bounds.width
+        var itemHeight = collectionView.bounds.height
+        if collectionView == categoryCollectionView{
+            itemWidth = collectionView.bounds.width - 5
+            itemHeight = collectionView.bounds.height - 5
+            print(collectionView)
+        }
             return CGSize(width: itemWidth, height: itemHeight)
         }
     
