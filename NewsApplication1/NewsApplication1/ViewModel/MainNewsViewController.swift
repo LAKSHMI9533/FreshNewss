@@ -66,7 +66,7 @@ class MainNewsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //ApiCall()
     }
-    
+   
     
     func ApiCall(urll:String = ""){
         if urll == ""{
@@ -116,12 +116,36 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             return cell
         }else{
             let cell = NewsCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-            //cell.imageView.image = UIImage(named: "math-83288")
+            cell.shareButton.tag = indexPath.row
+            cell.shareButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            cell.markedButton.addTarget(self, action: #selector(MarkedButtonTapped(_:)), for: .touchUpInside)
             return cell
         }
         
     }
     
+    @objc func MarkedButtonTapped(_ sender:UIButton){
+        print("marked")
+    }
+    
+    @objc func buttonTapped(_ sender: UIButton){
+        print(sender.tag)
+        var dataToShare = " "
+        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].author ?? "" ) as String)")
+        dataToShare.append("\n")
+        dataToShare.append((decodedResponce.articles[sender.tag].content ?? "") as String)
+        dataToShare.append("\n")
+        dataToShare.append((decodedResponce.articles[sender.tag].description ?? "") as String)
+        dataToShare.append("\n")
+        dataToShare.append((decodedResponce.articles[sender.tag].link ?? "") as String)
+        dataToShare.append("\n")
+
+        dataToShare.append((decodedResponce.articles[sender.tag].title ?? "") as String)
+
+        let vc = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = self.view
+        self.present(vc, animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
@@ -151,7 +175,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
                 
                 cell.descriptionLabel.text = "\(decodedResponce.articles[indexPath.row].description ?? "data not found ")"
                 cell.titleLabel.text = "\(decodedResponce.articles[indexPath.row].title ?? "data not found")"
-                cell.contentLabel.text = "\(decodedResponce.articles[indexPath.row].content ?? "data not found come")\n\n PublishedAt  :       \((decodedResponce.articles[indexPath.row].publishedAt ?? "") as String )\n Author   :  \((decodedResponce.articles[indexPath.row].author ?? "") as String )"
+                cell.contentLabel.text = "\(decodedResponce.articles[indexPath.row].content ?? "data not found come")\n\n PublishedAt   :   \((decodedResponce.articles[indexPath.row].publishedAt ?? "") as String )\n Author   :  \((decodedResponce.articles[indexPath.row].author ?? "") as String )"
                 
                 if decodedResponce.articles[indexPath.row].urlToImage != nil {
                     DispatchQueue.main.async {

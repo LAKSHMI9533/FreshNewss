@@ -13,11 +13,8 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     
+    @IBOutlet var markedButton: UIButton!
     @IBOutlet var shareButton: UIButton!
-    //    var activityView: UIActivityIndicatorView?
-
-    @IBAction func SHAREBUTTONCLICKED(_ sender: Any) {
-    }
     
     override func awakeFromNib() {
         

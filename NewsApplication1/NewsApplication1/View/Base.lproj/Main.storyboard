@@ -94,7 +94,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Qa3-cF-dkR">
-                                        <rect key="frame" x="10" y="10" width="383" height="34"/>
+                                        <rect key="frame" x="10" y="10" width="373" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEr-qK-aMQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="21" height="34"/>
@@ -106,13 +106,13 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="BeS-ix-qba">
-                                                <rect key="frame" x="24" y="0.0" width="281.66666666666669" height="34"/>
+                                                <rect key="frame" x="24" y="0.0" width="271.66666666666669" height="34"/>
                                                 <color key="textColor" red="0.093169878260000005" green="0.40740508759999999" blue="0.81687141190000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbO-h8-iap">
-                                                <rect key="frame" x="308.66666666666669" y="0.0" width="74.333333333333314" height="34"/>
+                                                <rect key="frame" x="298.66666666666669" y="0.0" width="74.333333333333314" height="34"/>
                                                 <color key="tintColor" name="background color"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="search" image="magnifyingglass" catalog="system">
@@ -188,7 +188,7 @@
                                     <constraint firstItem="616-Fw-3ur" firstAttribute="leading" secondItem="6si-d8-bpR" secondAttribute="leading" constant="5" id="Wk1-IG-DU1"/>
                                     <constraint firstAttribute="bottom" secondItem="616-Fw-3ur" secondAttribute="bottom" id="mAl-bK-qQY"/>
                                     <constraint firstAttribute="trailing" secondItem="616-Fw-3ur" secondAttribute="trailing" constant="5" id="pUo-DA-TRB"/>
-                                    <constraint firstAttribute="trailing" secondItem="Qa3-cF-dkR" secondAttribute="trailing" id="uLs-Yy-0Fb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qa3-cF-dkR" secondAttribute="trailing" constant="10" id="uLs-Yy-0Fb"/>
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPc-sH-xi9">
