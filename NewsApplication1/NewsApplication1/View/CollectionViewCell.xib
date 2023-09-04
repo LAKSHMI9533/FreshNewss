@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,23 +27,31 @@
                                 <rect key="frame" x="0.0" y="319" width="81.5" height="304"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJC-HI-kZq">
-                                        <rect key="frame" x="0.0" y="0.0" width="32.5" height="72"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="32.5" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0O-7A-OFI">
-                                        <rect key="frame" x="0.0" y="72" width="81.5" height="58.5"/>
+                                        <rect key="frame" x="0.0" y="47" width="81.5" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWJ-5l-gyC">
-                                        <rect key="frame" x="0.0" y="131.5" width="52.5" height="172.5"/>
+                                        <rect key="frame" x="0.0" y="86" width="52.5" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFM-X0-an0">
+                                        <rect key="frame" x="0.0" y="-21" width="75" height="325"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="SHAREBUTTONCLICKED:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Fmh-7T-5BJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -65,6 +74,7 @@
                 <outlet property="contentLabel" destination="bWJ-5l-gyC" id="wAY-Ez-qVQ"/>
                 <outlet property="descriptionLabel" destination="X0O-7A-OFI" id="rjA-XE-Iww"/>
                 <outlet property="imageView" destination="mMX-ia-tTJ" id="E9E-th-ZwL"/>
+                <outlet property="shareButton" destination="xFM-X0-an0" id="XlE-sq-eaK"/>
                 <outlet property="titleLabel" destination="MJC-HI-kZq" id="oBF-lS-r4P"/>
             </connections>
             <point key="canvasLocation" x="48.854961832061065" y="-13.028169014084508"/>
