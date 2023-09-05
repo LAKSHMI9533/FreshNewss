@@ -71,6 +71,18 @@ func validatePhoneNo(_ phoneNo:String) -> String?{
     if phoneNo.count != 10{
         return "Phone No must contain 10 digits"
     }
+    
+    var letterCount = 0
+    var digitCount = 0
+
+    for uni in phoneNo.unicodeScalars {
+        if letters.contains(uni) {
+            letterCount += 1
+        } else if digits.contains(uni) {
+            digitCount += 1
+        }
+    }
+
     return nil
 }
 
