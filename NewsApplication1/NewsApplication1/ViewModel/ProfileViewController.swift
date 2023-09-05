@@ -58,7 +58,7 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (collectionView.frame.size.width - 20)/2
-        return CGSize(width: size, height: size/4)
+        return CGSize(width: size, height: 40)
     }
     
     

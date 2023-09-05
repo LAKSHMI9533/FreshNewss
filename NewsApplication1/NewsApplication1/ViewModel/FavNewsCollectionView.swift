@@ -9,40 +9,40 @@ import Foundation
 import UIKit
 import Combine
 
-class FavNewsCollectionViewController: UIViewController{
+class FavNewsViewController: UIViewController{
     @IBOutlet var favNewsCollection: UICollectionView!
-    var networking = Networking()
     var can =  Set<AnyCancellable>()
     var favDecodedResponce : Responce!
     var favresultsarray : String = ""
     var arrayforfav : [Responce] = []
     var arrayforfav1 : [results] = []
     var coount = 0
-    var model = FavCollectionViewModel()
+    var model = FavNewsViewModel()
     override func viewDidLoad() {
         favNewsCollection.delegate = self
         favNewsCollection.dataSource = self
         favNewsCollection.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         for i in 0...FavArray.count-1{
-            let a = networking.addingCatToUrl(category: categoryEnum.allCases[i])
+            let a = addingCatToUrl(category: categoryEnum.allCases[i])
             ApiCall(urll: a)
         }
     }
     
     func ApiCall(urll:String = ""){
         if urll == ""{
-            networking.apiCall().sink { error in
+            apiCall().sink { error in
                 print(error)
             } receiveValue: { decodedResponce1 in
                 self.favDecodedResponce = decodedResponce1
             }.store(in: &can)
         } else {
-            networking.apiCall(catApiUrl: urll).sink { error in
+            apiCall(catApiUrl: urll).sink { error in
                 print(error)
             } receiveValue: { [self] decodedResponce1 in
  
                 self.arrayforfav.append(decodedResponce1)
                 self.arrayforfav1.append(contentsOf: decodedResponce1.articles)
+                arrayforfav1.shuffle()
                 if arrayforfav.count == FavArray.count{
                     DispatchQueue.main.async {
                         self.favNewsCollection.reloadData()
@@ -57,9 +57,8 @@ class FavNewsCollectionViewController: UIViewController{
 
         let buttond = sender
         if buttond.currentImage == image2{
-            var aa = model.fetching(titleToSearch: arrayforfav1[sender.tag].title!)
-            print(aa)
-            if aa != nil{
+            let aa = model.fetching(titleToSearch: arrayforfav1[sender.tag].title!)
+            if aa.isEmpty == false{
                 model.DeleteOperation(ob: aa.first!)
             }
             sender.setImage(image1, for: UIControl.State.normal)
@@ -88,22 +87,14 @@ class FavNewsCollectionViewController: UIViewController{
         dataToShare.append("Articles: \((arrayforfav1[sender.tag].url ?? "" ) as String)")
         
         let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
-//            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
-        let button = sender as UIView
-//        let cell = button.nearestAncestor(ofType: CollectionViewCell.self),
-
         activityVC.popoverPresentationController?.sourceView = sender.superview
-
             if UIDevice.current.userInterfaceIdiom == .phone {
                 activityVC.modalPresentationStyle = .overFullScreen
             }
-                
             if UIDevice.current.userInterfaceIdiom == .pad {
                 activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
-
                 activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             }
-
         present(activityVC, animated: true, completion: nil)
 
             activityVC.completionWithItemsHandler = { [weak self](activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
@@ -111,18 +102,12 @@ class FavNewsCollectionViewController: UIViewController{
                     print(error.localizedDescription)
                     return
                 }
-
-                // 5. set the activityVC to nil after the user is done
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.activityVC = nil
-//                }
-         //   }
         }
     }
 }
 
 
-extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionViewDataSource{
+extension FavNewsViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if arrayforfav1.isEmpty{
@@ -138,7 +123,7 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
         cell.markedButton.tag = indexPath.row
         cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
                                    , for: UIControl.State.normal)
-        var fetchingResponce = model.fetching(titleToSearch: arrayforfav1[indexPath.row].title!)
+        let fetchingResponce = model.fetching(titleToSearch: arrayforfav1[indexPath.row].title!)
         if fetchingResponce.isEmpty {
             cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
                                        , for: UIControl.State.normal)
@@ -152,20 +137,14 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        
         cell.layer.cornerRadius = 7
         cell.layer.borderWidth = 1
-        
-        
         let cell = cell as! CollectionViewCell
         var activityView: UIActivityIndicatorView?
         activityView = UIActivityIndicatorView(style: .large)
         activityView?.frame = cell.imageView.bounds
         activityView?.color = .systemPink
-
         if  (!arrayforfav1.isEmpty){
-            print("count = \(arrayforfav1.count)")
             cell.imageView.image  = nil
             if indexPath.row < arrayforfav1.count{
                 if(arrayforfav1[indexPath.row] != nil){
@@ -177,7 +156,7 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
                     cell.titleLabel.text = "\(arrayforfav1[indexPath.row].title ?? "notfound")"
                     cell.contentLabel.text = "\(arrayforfav1[indexPath.row].content ?? "notfound")"
                     if arrayforfav1[indexPath.row].urlToImage != nil{
-                        networking.apiCallForImage(uurl: arrayforfav1[indexPath.row].urlToImage!).sink { error in
+                        apiCallForImage(uurl: arrayforfav1[indexPath.row].urlToImage!).sink { error in
                             print(error)
                         } receiveValue: { Responce in
                             DispatchQueue.main.async {
@@ -186,12 +165,10 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
                                 print("imageattached\(indexPath)")
                             }
                         }.store(in: &can)
-                        
                     }
                 }else {
                     print("empty")
                 }
-                
             }else{
                 print("error in will display")
             }
@@ -206,10 +183,9 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
         }
         self.present(vc, animated: true, completion: nil)
     }
-    
 }
 
-extension FavNewsCollectionViewController:UICollectionViewDelegateFlowLayout{
+extension FavNewsViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let itemWidth = collectionView.bounds.width - 10
             let itemHeight = collectionView.bounds.height - 100

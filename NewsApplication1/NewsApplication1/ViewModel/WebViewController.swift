@@ -21,11 +21,4 @@ class  WebViewController : UIViewController, WKNavigationDelegate{
         }
         newsWebView.load(URLRequest(url: URL(string: urlForNews)!))
     }
-//    override func updateViewConstraints() {
-//        self.view.frame.size.height = UIScreen.main.bounds.height - 150
-//        self.view.frame.origin.y =  150
-//        self.view.layer.cornerRadius = 7
-//        self.view.layer.borderWidth = 1
-//        super.updateViewConstraints()
-//    }
 }

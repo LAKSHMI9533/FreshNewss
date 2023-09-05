@@ -39,11 +39,8 @@ extension FavouriteInputViewController : UICollectionViewDelegate, UICollectionV
         cell.layer.borderColor = UIColor.gray.cgColor
         cell.layer.cornerRadius = 20
         cell.favCategoryLabel.text = categoryArray[indexPath.row]
-        
-        print(categoryArray[indexPath.row])
         cell.backgroundColor =  UIColor.secondarySystemBackground
         for item in FavArray {
-            print(categoryArray[indexPath.row], item)
             if categoryArray[indexPath.row] ==  item {
                 cell.backgroundColor = UIColor(named: "background color")
                 break
@@ -57,7 +54,7 @@ extension FavouriteInputViewController : UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (collectionView.frame.size.width - 20)/2
-        return CGSize(width: size, height: size/3)
+        return CGSize(width: size, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

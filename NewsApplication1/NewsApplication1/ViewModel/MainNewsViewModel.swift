@@ -19,7 +19,8 @@ class MainNewsViewModel{
            print(error)
        }
        return true
-   }
+    }
+    
     func fetching(titleToSearch :  String)->[Marked]{
         let fetchRequest = NSFetchRequest<Marked>(entityName: "Marked")
         fetchRequest.predicate = NSPredicate(format: "title == %@", titleToSearch)
@@ -27,7 +28,6 @@ class MainNewsViewModel{
         do{
             let results = try PersistentStorage.shared.persistentContainer.viewContext.fetch(fetchRequest)
             return results
-            //dummy = results
         }catch{
             print(error)
         }

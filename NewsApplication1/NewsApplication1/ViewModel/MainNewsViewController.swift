@@ -19,16 +19,14 @@ class MainNewsViewController: UIViewController {
     @IBOutlet var homeButton: UIButton!
     var refresh = UIRefreshControl()
     var can =  Set<AnyCancellable>()
-    var networking = Networking()
     var decodedResponce : Responce!
     var prev : UICollectionViewCell!
     var markedArray : [Int] = []
     var model = MainNewsViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ApiCall()
-        let myColor : UIColor = UIColor.white
-        //.layer.borderColor = myColor.cgColor
         searchTextField.layer.borderWidth = 2
         searchTextField.layer.borderColor = UIColor(named: "background color")?.cgColor
         searchTextField.layer.cornerRadius = 15
@@ -57,32 +55,26 @@ class MainNewsViewController: UIViewController {
         print("rotated")
         if UIDevice.current.orientation.isLandscape{
             print("landscape")
-                viewDidLoad()
+            ApiCall()
         }else{
             print("potrait")
-                viewDidLoad()
+            ApiCall()
         }
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //ApiCall()
-    }
-   
-    
     func ApiCall(urll:String = ""){
         if urll == ""{
-            networking.apiCall().sink { error in
+            apiCall().sink { error in
                 print(error)
             } receiveValue: { decodedResponce1 in
                 self.decodedResponce = decodedResponce1
-                print(decodedResponce1.articles.count)
                 DispatchQueue.main.async {
                     self.NewsCollectionView.reloadData()
                 }
             }.store(in: &can)
         } else {
-            networking.apiCall(catApiUrl: urll).sink { error in
+            apiCall(catApiUrl: urll).sink { error in
                 print(error)
             } receiveValue: { decodedResponce1 in
                 self.decodedResponce = decodedResponce1
@@ -93,8 +85,59 @@ class MainNewsViewController: UIViewController {
             }.store(in: &can)
         }
     }
-}
+    @objc func MarkedButtonTapped(_ sender:UIButton){
+        let image1 = UIImage(systemName: "square.and.arrow.down")
+        let image2 = UIImage(systemName: "square.and.arrow.down.fill")
 
+        let buttond = sender
+        if buttond.currentImage == image2{
+            let aa = model.fetching(titleToSearch: decodedResponce.articles[sender.tag].title!)
+            print(aa)
+            if aa.isEmpty == false{
+                model.DeleteOperation(ob: aa.first!)
+            }
+            sender.setImage(image1, for: UIControl.State.normal)
+        } else {
+            markedArray.append(sender.tag)
+            sender.setImage(image2, for: UIControl.State.normal)
+            let markedNews = Marked(context: PersistentStorage.shared.persistentContainer.viewContext)
+
+            markedNews.author = (decodedResponce.articles[sender.tag].author ?? "") as String
+            markedNews.context = (decodedResponce.articles[sender.tag].content ?? "") as String
+            markedNews.descript12 = (decodedResponce.articles[sender.tag].description ?? "") as String
+            markedNews.publishedAt = (decodedResponce.articles[sender.tag].publishedAt ?? "") as String
+            markedNews.title = (decodedResponce.articles[sender.tag].title ?? "") as String
+            markedNews.url = (decodedResponce.articles[sender.tag].url ?? "") as String
+            markedNews.urlToImage = (decodedResponce.articles[sender.tag].urlToImage ?? "") as String
+            PersistentStorage.shared.saveContext()
+        }
+    }
+    
+    
+    @objc func buttonTapped(_ sender: UIButton){
+        var dataToShare = " "
+        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].url ?? "\(String(describing: decodedResponce.articles[sender.tag].content))" ) as String)")
+        
+        let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = sender.superview
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                activityVC.modalPresentationStyle = .overFullScreen
+            }
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
+                activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
+        present(activityVC, animated: true, completion: nil)
+
+            activityVC.completionWithItemsHandler = { [weak self](activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+        }
+    }
+    
+}
 
 extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     
@@ -108,7 +151,6 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
                 return 0
             }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,6 +158,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCollectionViewCell
             cell.textLabel.text = "  \(categoryArray[indexPath.row])   "
             cell.textLabel.sizeToFit()
+            
             return cell
         }else{
             let cell = NewsCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
@@ -123,7 +166,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             cell.markedButton.tag = indexPath.row
             cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
                                        , for: UIControl.State.normal)
-            var fetchingResponce = model.fetching(titleToSearch: decodedResponce.articles[indexPath.row].title!)
+            let fetchingResponce = model.fetching(titleToSearch: decodedResponce.articles[indexPath.row].title!)
             if fetchingResponce.isEmpty {
                 cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
                                            , for: UIControl.State.normal)
@@ -137,108 +180,27 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
         }
         
     }
-    @objc func MarkedButtonTapped(_ sender:UIButton){
-        let image1 = UIImage(systemName: "square.and.arrow.down")
-        let image2 = UIImage(systemName: "square.and.arrow.down.fill")
-
-        let buttond = sender
-        if buttond.currentImage == image2{
-            var aa = model.fetching(titleToSearch: decodedResponce.articles[sender.tag].title!)
-            print(aa)
-            if aa != nil{
-                model.DeleteOperation(ob: aa.first!)
-            }
-            sender.setImage(image1, for: UIControl.State.normal)
-            
-        }else{
-            markedArray.append(sender.tag)
-            print(markedArray)
-            sender.setImage(image2, for: UIControl.State.normal)
-            let markedNews = Marked(context: PersistentStorage.shared.persistentContainer.viewContext)
-
-            markedNews.author = (decodedResponce.articles[sender.tag].author ?? "") as String
-            markedNews.context = (decodedResponce.articles[sender.tag].content ?? "") as String
-            markedNews.descript12 = (decodedResponce.articles[sender.tag].description ?? "") as String
-            markedNews.publishedAt = (decodedResponce.articles[sender.tag].publishedAt ?? "") as String
-            markedNews.title = (decodedResponce.articles[sender.tag].title ?? "") as String
-            markedNews.url = (decodedResponce.articles[sender.tag].url ?? "") as String
-            markedNews.urlToImage = (decodedResponce.articles[sender.tag].urlToImage ?? "") as String
-            PersistentStorage.shared.saveContext()
-
-        }
-        
-        
-    }
-    
-    
-    @objc func buttonTapped(_ sender: UIButton){
-        print(sender.tag)
-        var dataToShare = " "
-        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].url ?? "\(decodedResponce.articles[sender.tag].content)" ) as String)")
-        
-        let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
-//            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
-        let button = sender as UIView
-//        let cell = button.nearestAncestor(ofType: CollectionViewCell.self),
-
-        activityVC.popoverPresentationController?.sourceView = sender.superview
-
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                activityVC.modalPresentationStyle = .overFullScreen
-            }
-                
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
-
-                activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
-            }
-
-        present(activityVC, animated: true, completion: nil)
-
-            activityVC.completionWithItemsHandler = { [weak self](activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-
-                // 5. set the activityVC to nil after the user is done
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.activityVC = nil
-//                }
-         //   }
-        }
-    }
-    
+  
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        
-        
         cell.layer.cornerRadius = 7
         cell.layer.borderWidth = 1
-        
         if collectionView != categoryCollectionView{
-            
             let cell = cell as! CollectionViewCell
-    
             var activityView: UIActivityIndicatorView?
             activityView = UIActivityIndicatorView(style: .large)
             activityView?.frame = cell.imageView.bounds
             activityView?.color = .systemPink
-
             if  (decodedResponce != nil){
                 cell.imageView.image = nil
                 cell.imageView.addSubview(activityView!)
                 activityView?.startAnimating()
-                
                 cell.descriptionLabel.text = "\(decodedResponce.articles[indexPath.row].description ?? "data not found ")"
                 cell.titleLabel.text = "\(decodedResponce.articles[indexPath.row].title ?? "data not found")"
                 cell.contentLabel.text = "\(decodedResponce.articles[indexPath.row].content ?? "data not found come")\n\n PublishedAt   :   \((decodedResponce.articles[indexPath.row].publishedAt ?? "") as String )\n Author   :  \((decodedResponce.articles[indexPath.row].author ?? "") as String )"
-                
                 if decodedResponce.articles[indexPath.row].urlToImage != nil {
                     DispatchQueue.main.async {
-                        
-                        self.networking.apiCallForImage(uurl: self.decodedResponce.articles[indexPath.row].urlToImage!).sink { error in
+                        apiCallForImage(uurl: self.decodedResponce.articles[indexPath.row].urlToImage!).sink { error in
                             print(error)
                         } receiveValue: { Responce in
                             DispatchQueue.main.async {
@@ -258,12 +220,11 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView{
             let cell = collectionView.cellForItem(at: indexPath) as! CategoryCollectionViewCell
-            
             if cell != prev{
                 if let temp = prev{
                     prev.backgroundColor = nil
                 }
-                cell.backgroundColor = .brown
+                cell.backgroundColor = .lightGray
                 if(cell.isSelected)
                 {
                     let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
@@ -280,7 +241,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
                     cell.backgroundColor = .blue
                 }
                 prev = cell
-                let urlForCategory = networking.addingCatToUrl(category: categoryEnum.allCases[indexPath.row])
+                let urlForCategory = addingCatToUrl(category: categoryEnum.allCases[indexPath.row])
                 ApiCall(urll: urlForCategory)
                 
             }else{
@@ -309,7 +270,6 @@ extension MainNewsViewController:UICollectionViewDelegateFlowLayout{
         if collectionView == categoryCollectionView{
             itemWidth = collectionView.bounds.width - 5
             itemHeight = collectionView.bounds.height - 5
-            print(collectionView)
         }
         
             return CGSize(width: itemWidth, height: itemHeight)

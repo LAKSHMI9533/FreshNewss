@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-class MarkedNewsModel{
+class MarkedNewsViewModel{
     var dummy : [Marked]!
     
     func fetching()->[Marked]{
@@ -28,7 +28,6 @@ class MarkedNewsModel{
         do{
             let results = try PersistentStorage.shared.persistentContainer.viewContext.fetch(fetchRequest)
             return results
-            //dummy = results
         }catch{
             print(error)
         }

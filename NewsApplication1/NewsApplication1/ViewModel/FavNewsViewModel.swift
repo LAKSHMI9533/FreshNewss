@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-class FavCollectionViewModel{
+class FavNewsViewModel{
     var dummy : [Marked]!
     func DeleteOperation (ob : NSManagedObject) -> Bool{
        let context  = PersistentStorage.shared.persistentContainer.viewContext

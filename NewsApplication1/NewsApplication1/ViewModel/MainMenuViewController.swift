@@ -15,14 +15,6 @@ class MainMenuViewController : UIViewController{
     @IBOutlet var tapGester: UITapGestureRecognizer!
     @IBOutlet var MenuTableView: UITableView!
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let position = touch.location(in:.none)
-                print(position.x)
-                print(position.y)
-            }
-    }
-     
     @IBAction func closeButtonAction(_ sender: Any) {
         dismiss(animated: false)
     }
