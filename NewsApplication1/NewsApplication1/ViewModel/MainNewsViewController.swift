@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class MainNewsViewController: UIViewController {
     
@@ -117,6 +118,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
         }else{
             let cell = NewsCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
             cell.shareButton.tag = indexPath.row
+            cell.markedButton.tag = indexPath.row
             cell.shareButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.markedButton.addTarget(self, action: #selector(MarkedButtonTapped(_:)), for: .touchUpInside)
             return cell
@@ -125,27 +127,57 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     @objc func MarkedButtonTapped(_ sender:UIButton){
-        print("marked")
+        var tempStruct = results()
+        tempStruct.author = (decodedResponce.articles[sender.tag].author ?? "") as String
+        tempStruct.content = (decodedResponce.articles[sender.tag].content ?? "") as String
+        tempStruct.description = (decodedResponce.articles[sender.tag].description ?? "") as String
+       
+        tempStruct.publishedAt = (decodedResponce.articles[sender.tag].publishedAt ?? "") as String
+        tempStruct.title = (decodedResponce.articles[sender.tag].title ?? "") as String
+        tempStruct.url = (decodedResponce.articles[sender.tag].url ?? "") as String
+        tempStruct.urlToImage = (decodedResponce.articles[sender.tag].urlToImage ?? "") as String
+        print(tempStruct)
     }
+    
     
     @objc func buttonTapped(_ sender: UIButton){
         print(sender.tag)
         var dataToShare = " "
         dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].author ?? "" ) as String)")
-        dataToShare.append("\n")
-        dataToShare.append((decodedResponce.articles[sender.tag].content ?? "") as String)
-        dataToShare.append("\n")
-        dataToShare.append((decodedResponce.articles[sender.tag].description ?? "") as String)
-        dataToShare.append("\n")
-        dataToShare.append((decodedResponce.articles[sender.tag].link ?? "") as String)
-        dataToShare.append("\n")
+        
+        let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
+//            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
+        let button = sender as UIView
+//        let cell = button.nearestAncestor(ofType: CollectionViewCell.self),
 
-        dataToShare.append((decodedResponce.articles[sender.tag].title ?? "") as String)
+        activityVC.popoverPresentationController?.sourceView = sender.superview
 
-        let vc = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
-        vc.popoverPresentationController?.sourceView = self.view
-        self.present(vc, animated: true)
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                activityVC.modalPresentationStyle = .overFullScreen
+            }
+                
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
+
+                activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
+
+        present(activityVC, animated: true, completion: nil)
+
+            activityVC.completionWithItemsHandler = { [weak self](activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+
+                // 5. set the activityVC to nil after the user is done
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.activityVC = nil
+//                }
+         //   }
+        }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         

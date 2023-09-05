@@ -398,6 +398,28 @@
             </objects>
             <point key="canvasLocation" x="72.51908396946564" y="160.56338028169014"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="V9H-UJ-26I">
+            <objects>
+                <viewController id="wF1-nX-VF4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wMe-gK-5y2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Y-Yw-gt2">
+                                <rect key="frame" x="50" y="600" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kmK-uk-7Cp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qc9-SI-8Qq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="782"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="DhD-to-5bq">
             <objects>

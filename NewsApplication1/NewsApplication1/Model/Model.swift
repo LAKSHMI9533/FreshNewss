@@ -13,15 +13,13 @@ struct Responce : Codable{
 }
 
 struct results : Codable{
-    var url : String?
-    var title : String?
-    var link : String?
-    var description : String?
-    var content : String?
-    var urlToImage : String?
-    var country : [String?]?
-    var publishedAt : String?
     var author : String?
+    var title : String?
+    var description : String?
+    var url : String?
+    var urlToImage : String?
+    var publishedAt : String?
+    var content : String?
     var nextPage : Int?
 }
 
