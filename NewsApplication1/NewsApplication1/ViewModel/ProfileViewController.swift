@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
         profileIconImage.layer.cornerRadius = profileIconImage.frame.width/2
         selectedTopicCollectionView.isUserInteractionEnabled = false
         
+        userNameLabel.text = username
+        
         print(FavArray)
         selectedTopicCollectionView.reloadData()
     }
@@ -29,6 +31,9 @@ class ProfileViewController: UIViewController {
         selectedTopicCollectionView.reloadData()
     }
     
+    @IBAction func backButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 
 }
 

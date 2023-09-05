@@ -13,13 +13,13 @@
 		5D5C54F52A9DCF99008326BD /* FavouriteInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C54F42A9DCF99008326BD /* FavouriteInputViewController.swift */; };
 		5D5C54F92A9DEFD3008326BD /* FavouriteInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5C54F82A9DEFD3008326BD /* FavouriteInputCollectionViewCell.swift */; };
 		5D95D9772A9F1A2D00211536 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D95D9752A9F1A2D00211536 /* CoreDataModel.xcdatamodeld */; };
-		5D9905692A9E264C006F155F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9905682A9E264C006F155F /* LoginViewController.swift */; };
 		5D99057E2A9E2D7C006F155F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99057D2A9E2D7C006F155F /* SignInViewController.swift */; };
 		5D9905802A9E2E5E006F155F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D99057F2A9E2E5E006F155F /* SignInViewModel.swift */; };
 		5D9905822A9E2EA4006F155F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9905812A9E2EA4006F155F /* RegisterViewController.swift */; };
 		5D9905842A9E2F26006F155F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9905832A9E2F26006F155F /* SignUpViewModel.swift */; };
 		5D9905862A9E2F95006F155F /* UserDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9905852A9E2F95006F155F /* UserDataRepository.swift */; };
 		5D9905882A9E2FD3006F155F /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9905872A9E2FD3006F155F /* UserDataModel.swift */; };
+		5DB275422AA78B830016FF8B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB275412AA78B830016FF8B /* Utilities.swift */; };
 		981CBE632A9B5FEF0005B1F8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CBE622A9B5FEF0005B1F8 /* WebViewController.swift */; };
 		981CBE682A9B778E0005B1F8 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CBE662A9B778E0005B1F8 /* TableViewCell.swift */; };
 		981CBE692A9B778E0005B1F8 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981CBE672A9B778E0005B1F8 /* TableViewCell.xib */; };
@@ -51,13 +51,13 @@
 		5D5C54F42A9DCF99008326BD /* FavouriteInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteInputViewController.swift; sourceTree = "<group>"; };
 		5D5C54F82A9DEFD3008326BD /* FavouriteInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D95D9762A9F1A2D00211536 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		5D9905682A9E264C006F155F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5D99057D2A9E2D7C006F155F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5D99057F2A9E2E5E006F155F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		5D9905812A9E2EA4006F155F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5D9905832A9E2F26006F155F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5D9905852A9E2F95006F155F /* UserDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRepository.swift; sourceTree = "<group>"; };
 		5D9905872A9E2FD3006F155F /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		5DB275412AA78B830016FF8B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		981CBE622A9B5FEF0005B1F8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		981CBE662A9B778E0005B1F8 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		981CBE672A9B778E0005B1F8 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		5D9905672A9E2615006F155F /* login */ = {
 			isa = PBXGroup;
 			children = (
-				5D9905682A9E264C006F155F /* LoginViewController.swift */,
+				5DB275412AA78B830016FF8B /* Utilities.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -276,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D9905882A9E2FD3006F155F /* UserDataModel.swift in Sources */,
-				5D9905692A9E264C006F155F /* LoginViewController.swift in Sources */,
 				9838A3982A971D3600C687D3 /* CategoryCollectionViewCell.swift in Sources */,
 				98C6623B2A95DC0F00F4C163 /* MainNewsViewController.swift in Sources */,
 				9838A38E2A95E5E400C687D3 /* Networking.swift in Sources */,
@@ -294,6 +293,7 @@
 				9838A39E2A973C9100C687D3 /* HomeViewController.swift in Sources */,
 				5D95D9772A9F1A2D00211536 /* CoreDataModel.xcdatamodeld in Sources */,
 				5D9905842A9E2F26006F155F /* SignUpViewModel.swift in Sources */,
+				5DB275422AA78B830016FF8B /* Utilities.swift in Sources */,
 				5D9905862A9E2F95006F155F /* UserDataRepository.swift in Sources */,
 				5D5C54F52A9DCF99008326BD /* FavouriteInputViewController.swift in Sources */,
 				9838A3A02A9781EB00C687D3 /* MainNewsViewModel.swift in Sources */,

@@ -12,6 +12,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var errorMsgLabel: UILabel!
     
     var user: String = ""
             
@@ -23,7 +24,7 @@ class SignInViewController: UIViewController {
         let tap = UITapGestureRecognizer.init(target: self, action:#selector(navRegisterPage(sender:)))
         registerLabel.addGestureRecognizer(tap)
                 
-        user = userNameTextField.text!
+        errorMsgLabel.isHidden = true
     }
             
     /// To navigate to register page
@@ -39,14 +40,27 @@ class SignInViewController: UIViewController {
             
         // MARK: - Button Action Methods
     @IBAction func onLoginClick(_ sender: Any) {
-                user = userNameTextField.text ?? ""
-        let valid = validateLogin(userNameInput: userNameTextField.text!, passwordInput: passwordTextField.text!)
-        if valid {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let pc = storyboard.instantiateViewController(withIdentifier: "HomeTabBarController")
-//            pc.presentationStyle = .fullScreen
-            self.present(pc, animated: true)
-//                pc.loginObj = self
+        if !isFromSideMenuLogin {
+            errorMsgLabel.isHidden = true
+            if (userNameTextField.text != "" && passwordTextField.text != "") {
+                let valid = validateLogin(userNameInput: userNameTextField.text!, passwordInput: passwordTextField.text!)
+                if valid {
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let pc = storyboard.instantiateViewController(withIdentifier: "HomeTabBarController")
+                    //            pc.presentationStyle = .fullScreen
+                    self.present(pc, animated: true)
+                    //                pc.loginObj = self
+                } else {
+                    errorMsgLabel.text = "Invalid Credentials!"
+                    errorMsgLabel.isHidden = false
+                }
+            } else {
+                errorMsgLabel.text = "Please enter details"
+                errorMsgLabel.isHidden = false
+            }
+        } else {
+            self.dismiss(animated: true)
         }
     }
 }

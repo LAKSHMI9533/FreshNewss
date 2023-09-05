@@ -41,13 +41,12 @@ extension FavouriteInputViewController : UICollectionViewDelegate, UICollectionV
         cell.favCategoryLabel.text = categoryArray[indexPath.row]
         
         print(categoryArray[indexPath.row])
+        cell.backgroundColor =  UIColor.secondarySystemBackground
         for item in FavArray {
             print(categoryArray[indexPath.row], item)
             if categoryArray[indexPath.row] ==  item {
                 cell.backgroundColor = UIColor(named: "background color")
                 break
-            } else {
-                cell.backgroundColor =  UIColor.secondarySystemBackground
             }
         }
         return cell

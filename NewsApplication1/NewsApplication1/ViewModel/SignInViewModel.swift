@@ -24,6 +24,7 @@ func validateLogin(userNameInput:String, passwordInput:String) -> Bool {
         result.forEach( {
             if (userNameInput == $0.userName && passwordInput == $0.password) {
                 bool = true
+                username = userNameInput
             }
         } )
     } catch let error {

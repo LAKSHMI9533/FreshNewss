@@ -114,6 +114,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoryCollectionView{
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCollectionViewCell
+            cell.textLabel.text = "  \(categoryArray[indexPath.row])   "
             cell.textLabel.sizeToFit()
             return cell
         }else{
@@ -216,12 +217,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
         cell.layer.cornerRadius = 7
         cell.layer.borderWidth = 1
         
-        if collectionView == categoryCollectionView{
-            let cell = cell as! CategoryCollectionViewCell
-            cell.textLabel.text = "  \(categoryArray[indexPath.row])   "
-            cell.textLabel.sizeToFit()
-            
-        }else{
+        if collectionView != categoryCollectionView{
             
             let cell = cell as! CollectionViewCell
     
