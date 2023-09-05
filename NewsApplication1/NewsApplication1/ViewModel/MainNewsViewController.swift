@@ -112,6 +112,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoryCollectionView{
             let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCollectionViewCell
+            cell.textLabel.text = "  \(categoryArray[indexPath.row])   "
             cell.textLabel.sizeToFit()
             return cell
         }else{
@@ -125,17 +126,10 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        
-        
         cell.layer.cornerRadius = 7
         cell.layer.borderWidth = 1
         
-        if collectionView == categoryCollectionView{
-            let cell = cell as! CategoryCollectionViewCell
-            cell.textLabel.text = "  \(categoryArray[indexPath.row])   "
-            cell.textLabel.sizeToFit()
-            
-        }else{
+        if collectionView != categoryCollectionView{
             
             let cell = cell as! CollectionViewCell
     
@@ -223,8 +217,8 @@ extension MainNewsViewController:UICollectionViewDelegateFlowLayout{
         var itemWidth = collectionView.bounds.width
         var itemHeight = collectionView.bounds.height
         if collectionView == categoryCollectionView{
-            itemWidth = collectionView.bounds.width - 5
-            itemHeight = collectionView.bounds.height - 5
+            itemWidth = collectionView.frame.width - 5
+            itemHeight = collectionView.frame.height - 5
             print(collectionView)
         }
             return CGSize(width: itemWidth, height: itemHeight)

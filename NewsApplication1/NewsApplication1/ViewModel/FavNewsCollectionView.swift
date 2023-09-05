@@ -20,12 +20,19 @@ class FavNewsCollectionViewController: UIViewController{
     var coount = 0
     
     override func viewDidLoad() {
-        favNewsCollection.delegate = self
-        favNewsCollection.dataSource = self
-        favNewsCollection.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
-        for i in 0...FavArray.count-1{
-            let a = networking.addingCatToUrl(category: categoryEnum.allCases[i])
-            ApiCall(urll: a)
+        if isGuest {
+            let alert = UIAlertController(title: "", message: "Please Login to see your Favourites", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true)
+        } else {
+            favNewsCollection.delegate = self
+            favNewsCollection.dataSource = self
+            favNewsCollection.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
+            for i in 0...FavArray.count-1{
+                let a = networking.addingCatToUrl(category: categoryEnum.allCases[i])
+                ApiCall(urll: a)
+            }
         }
     }
     
@@ -49,6 +56,17 @@ class FavNewsCollectionViewController: UIViewController{
                     }
                 }
             }.store(in: &can)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if isGuest {
+            let alert = UIAlertController(title: "", message: "Please Login to see your Favourites", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action) in
+                
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true)
         }
     }
 }

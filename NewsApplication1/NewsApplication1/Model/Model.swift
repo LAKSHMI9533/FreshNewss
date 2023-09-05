@@ -27,21 +27,21 @@ struct results : Codable{
 
 
 enum categoryEnum : Int, CaseIterable{
-    case All = 0,general,business,
-         entertainment,
-         health,
-         politics,
-         science,
-         sports,
-         technology
+    case All = 0,General,Business,
+         Entertainment,
+         Health,
+         Politics,
+         Science,
+         Sports,
+         Technology
          
 }
 
 var menuArray = ["View Profile","Contact Us","Log Out"]
 
-var categoryArray = ["All","general","business","entertainment","health","politics", "science","sports","technology"]
+var categoryArray = ["All","General","Business","Entertainment","Health","Politics", "Science","Sports","Technology"]
 
-var FavArray = ["business","entertainment"]
+var FavArray = ["Business","Entertainment"]
 
 var searchUrl = "https://newsapi.org/v2/everything?apiKey=ef8d6b5fdee84cc6afcfd3b93b4f634b&q="
 

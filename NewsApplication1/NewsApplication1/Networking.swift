@@ -24,34 +24,33 @@ class Networking{
     func addingCatToUrl( category : categoryEnum)->String{
         
         switch category{
-        case .business :
+        case .Business :
             var q = a + "business"
             return q
-        case .entertainment:
+        case .Entertainment:
             let q = a + "entertainment"
             return q
-        case .health:
+        case .Health:
             let q = a + "health"
             return q
-        case .politics:
+        case .Politics:
             let q = a + "politics"
             return q
-        case .science:
+        case .Science:
             let q = a + "science"
             return q
-        case .sports:
+        case .Sports:
             let q = a + "sports"
             return q
-        case .technology:
+        case .Technology:
             let q = a + "technology"
             return q
-        case .general:
+        case .General:
             let q = a + "general"
             return q
         case .All:
             return baseUrlString
         }
-        return ""
     }
     
     

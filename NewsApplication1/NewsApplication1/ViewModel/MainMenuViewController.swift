@@ -31,7 +31,7 @@ class MainMenuViewController : UIViewController{
         let userEntity1 = Entity(context: PersistentStorage.shared.persistentContainer.viewContext)
         userEntity1.favArray = FavArray as NSObject
         PersistentStorage.shared.saveContext()
-        print(userEntity1.favArray as! [ String])
+
         MenuTableView.rowHeight = MenuTableView.bounds.height/9
         //        let transition = CATransition(8
 //        transition.duration = 2
@@ -50,6 +50,13 @@ class MainMenuViewController : UIViewController{
         self.view.layer.borderWidth = 1
         super.updateViewConstraints()
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.view.frame.size.width = UIScreen.main.bounds.width/2
+//        self.view.layer.cornerRadius = 7
+//        self.view.layer.borderWidth = 1
+//        super.updateViewConstraints()
+//    }
 }
 
 extension MainMenuViewController:UITableViewDelegate,UITableViewDataSource{
@@ -64,24 +71,48 @@ extension MainMenuViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        
         if menuArray[indexPath.row] == "View Profile" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let pc = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
-            self.present(pc, animated: true)
+            if !isGuest {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let pc = storyboard.instantiateViewController(withIdentifier: "ProfileVC")
+                self.present(pc, animated: true)
+            } else {
+                let alert = UIAlertController(title: "", message: "Please login to see your profile.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            }
         } else if menuArray[indexPath.row] == "Contact Us" {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let pc = storyboard.instantiateViewController(withIdentifier: "ContactUsVC")
             self.present(pc, animated: true)
         } else {
-            let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to Log out?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-                print("log out")
+            if menuArray[indexPath.row] == "Log Out" {
+                let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to Log out?", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+                    print("log out")
+                    menuArray[indexPath.row] = "Log In"
+                    FavArray = ["Business","Entertainment"]
+                    isGuest = true
+                    tableView.reloadData()
+                    
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true)
+            } else {
+                isFromSideMenuLogin = true
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let pc = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                self.present(pc, animated: true)
+                menuArray[indexPath.row] = "Log Out"
+                isGuest = false
+                tableView.reloadData()
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true)
         }
         
         MenuTableView.deselectRow(at: indexPath, animated: true)

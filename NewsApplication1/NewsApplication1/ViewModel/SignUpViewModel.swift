@@ -12,6 +12,7 @@ class RegisterViewModel{
     
     init(){}
     var logData:[Entity] = []
+
     
     func CreateUser(user: inout userDetails){
         let userEntity = Entity(context: PersistentStorage.shared.persistentContainer.viewContext)
@@ -76,6 +77,15 @@ func validatePhoneNo(_ phoneNo:String) -> String?{
 func validateFirstName(_ firstName:String) -> String?{
     let valid = /[A-Z]+[A-Za-z]{3,10}/
     
+    
+    for currentCharacter in firstName.unicodeScalars {
+        if upperCase.contains(currentCharacter) {
+            print("Character code \(currentCharacter) is UPPERCASE.")
+        } else {
+            print("Character code \(currentCharacter) is neither upper- nor lowercase.")
+        }
+    }
+    
     guard (firstName.wholeMatch(of: valid) != nil) else{
         return "First Name should start with Uppercase and contain min 3 and max 10 alphabets"
     }
@@ -106,6 +116,7 @@ func validateUserName(_ userName:String) -> String?{
     return nil
 }
 func validatePassword(_ password:String) -> String?{
+    let a = "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}"
     let valid = /[a-zA-Z0-9%$#@!~^&*()_`+={}|";':<>,.?]{6,15}/
     guard ((password.wholeMatch(of: valid)) != nil) else{
         return "Invalid password"
