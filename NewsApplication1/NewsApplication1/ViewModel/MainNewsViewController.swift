@@ -27,6 +27,11 @@ class MainNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ApiCall()
+        print(self.refresh.isRefreshing)
+        NewsCollectionView.refreshControl = UIRefreshControl()
+        NewsCollectionView.refreshControl?.addTarget(self, action:
+                                              #selector(handleRefreshControl),
+                                              for: .valueChanged)
         searchTextField.layer.borderWidth = 2
         searchTextField.layer.borderColor = UIColor(named: "background color")?.cgColor
         searchTextField.layer.cornerRadius = 15
@@ -62,6 +67,12 @@ class MainNewsViewController: UIViewController {
         }
         
     }
+    @objc func handleRefreshControl(){
+        ApiCall()
+        DispatchQueue.main.async {
+             // self.NewsCollectionView.refreshControl?.endRefreshing()
+           }
+    }
     
     func ApiCall(urll:String = ""){
         if urll == ""{
@@ -71,6 +82,8 @@ class MainNewsViewController: UIViewController {
                 self.decodedResponce = decodedResponce1
                 DispatchQueue.main.async {
                     self.NewsCollectionView.reloadData()
+                    self.NewsCollectionView.refreshControl?.endRefreshing()
+
                 }
             }.store(in: &can)
         } else {
@@ -81,6 +94,7 @@ class MainNewsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.NewsCollectionView.reloadData()
                     self.dismiss(animated: false, completion: nil)
+                    self.NewsCollectionView.refreshControl?.endRefreshing()
                 }
             }.store(in: &can)
         }

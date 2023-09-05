@@ -19,6 +19,10 @@ class FavNewsViewController: UIViewController{
     var coount = 0
     var model = FavNewsViewModel()
     override func viewDidLoad() {
+        favNewsCollection.refreshControl = UIRefreshControl()
+        favNewsCollection.refreshControl?.addTarget(self, action:
+                                              #selector(handleRefreshControl),
+                                              for: .valueChanged)
         favNewsCollection.delegate = self
         favNewsCollection.dataSource = self
         favNewsCollection.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
@@ -27,13 +31,24 @@ class FavNewsViewController: UIViewController{
             ApiCall(urll: a)
         }
     }
-    
+    @objc func handleRefreshControl() {
+        ApiCall()
+       DispatchQueue.main.async {
+          self.favNewsCollection.refreshControl?.endRefreshing()
+       }
+    }
     func ApiCall(urll:String = ""){
         if urll == ""{
             apiCall().sink { error in
                 print(error)
             } receiveValue: { decodedResponce1 in
                 self.favDecodedResponce = decodedResponce1
+                self.favresultsarray.shuffled()
+                DispatchQueue.main.async {
+                    self.favNewsCollection.reloadData()
+                   self.favNewsCollection.refreshControl?.endRefreshing()
+                }
+                
             }.store(in: &can)
         } else {
             apiCall(catApiUrl: urll).sink { error in
@@ -46,6 +61,7 @@ class FavNewsViewController: UIViewController{
                 if arrayforfav.count == FavArray.count{
                     DispatchQueue.main.async {
                         self.favNewsCollection.reloadData()
+                        self.favNewsCollection.refreshControl?.endRefreshing()
                     }
                 }
             }.store(in: &can)
