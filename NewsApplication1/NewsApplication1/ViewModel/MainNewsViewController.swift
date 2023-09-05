@@ -28,9 +28,9 @@ class MainNewsViewController: UIViewController {
         super.viewDidLoad()
         ApiCall()
         let myColor : UIColor = UIColor.white
-        searchTextField.layer.borderColor = myColor.cgColor
+        //.layer.borderColor = myColor.cgColor
         searchTextField.layer.borderWidth = 2
-        searchTextField.layer.borderColor = UIColor.black.cgColor
+        searchTextField.layer.borderColor = UIColor(named: "background color")?.cgColor
         searchTextField.layer.cornerRadius = 15
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource=self

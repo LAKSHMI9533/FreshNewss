@@ -212,7 +212,7 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
 extension FavNewsCollectionViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let itemWidth = collectionView.bounds.width - 10
-            let itemHeight = collectionView.bounds.height
+            let itemHeight = collectionView.bounds.height - 100
             return CGSize(width: itemWidth, height: itemHeight)
         }
 }

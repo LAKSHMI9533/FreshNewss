@@ -115,7 +115,7 @@
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="BeS-ix-qba">
                                                 <rect key="frame" x="42.999999999999986" y="0.0" width="252.66666666666663" height="40"/>
-                                                <color key="textColor" red="0.093169878260000005" green="0.40740508759999999" blue="0.81687141190000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -145,7 +145,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="839-O4-VnL" customClass="CategoryCollectionViewCell" customModule="NewsApplication1" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="839-O4-VnL" customClass="CategoryCollectionViewCell" customModule="NewsApplication1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="4.666666666666667" width="146" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="VpS-XN-5DQ">
@@ -208,7 +208,7 @@
                                     <color key="textColor" name="AccentColor"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="FlashNewss" id="OCE-0Y-1WD"/>
+                                    <navigationItem title="FlashNews" id="OCE-0Y-1WD"/>
                                 </items>
                             </navigationBar>
                         </subviews>
