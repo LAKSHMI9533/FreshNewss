@@ -22,7 +22,8 @@ class MainNewsViewController: UIViewController {
     var networking = Networking()
     var decodedResponce : Responce!
     var prev : UICollectionViewCell!
-    
+    var markedArray : [Int] = []
+    var model = MainNewsViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         ApiCall()
@@ -104,7 +105,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             if  (decodedResponce != nil){
                 return decodedResponce.articles.count
             } else {
-                return 10
+                return 0
             }
         }
         
@@ -119,31 +120,60 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
             let cell = NewsCollectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
             cell.shareButton.tag = indexPath.row
             cell.markedButton.tag = indexPath.row
+            cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
+                                       , for: UIControl.State.normal)
+            var fetchingResponce = model.fetching(titleToSearch: decodedResponce.articles[indexPath.row].title!)
+            if fetchingResponce.isEmpty {
+                cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
+                                           , for: UIControl.State.normal)
+            }else{
+                cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down.fill")
+                                           , for: UIControl.State.normal)
+            }
             cell.shareButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             cell.markedButton.addTarget(self, action: #selector(MarkedButtonTapped(_:)), for: .touchUpInside)
             return cell
         }
         
     }
-    
     @objc func MarkedButtonTapped(_ sender:UIButton){
-        var tempStruct = results()
-        tempStruct.author = (decodedResponce.articles[sender.tag].author ?? "") as String
-        tempStruct.content = (decodedResponce.articles[sender.tag].content ?? "") as String
-        tempStruct.description = (decodedResponce.articles[sender.tag].description ?? "") as String
-       
-        tempStruct.publishedAt = (decodedResponce.articles[sender.tag].publishedAt ?? "") as String
-        tempStruct.title = (decodedResponce.articles[sender.tag].title ?? "") as String
-        tempStruct.url = (decodedResponce.articles[sender.tag].url ?? "") as String
-        tempStruct.urlToImage = (decodedResponce.articles[sender.tag].urlToImage ?? "") as String
-        print(tempStruct)
+        let image1 = UIImage(systemName: "square.and.arrow.down")
+        let image2 = UIImage(systemName: "square.and.arrow.down.fill")
+
+        let buttond = sender
+        if buttond.currentImage == image2{
+            var aa = model.fetching(titleToSearch: decodedResponce.articles[sender.tag].title!)
+            print(aa)
+            if aa != nil{
+                model.DeleteOperation(ob: aa.first!)
+            }
+            sender.setImage(image1, for: UIControl.State.normal)
+            
+        }else{
+            markedArray.append(sender.tag)
+            print(markedArray)
+            sender.setImage(image2, for: UIControl.State.normal)
+            let markedNews = Marked(context: PersistentStorage.shared.persistentContainer.viewContext)
+
+            markedNews.author = (decodedResponce.articles[sender.tag].author ?? "") as String
+            markedNews.context = (decodedResponce.articles[sender.tag].content ?? "") as String
+            markedNews.descript12 = (decodedResponce.articles[sender.tag].description ?? "") as String
+            markedNews.publishedAt = (decodedResponce.articles[sender.tag].publishedAt ?? "") as String
+            markedNews.title = (decodedResponce.articles[sender.tag].title ?? "") as String
+            markedNews.url = (decodedResponce.articles[sender.tag].url ?? "") as String
+            markedNews.urlToImage = (decodedResponce.articles[sender.tag].urlToImage ?? "") as String
+            PersistentStorage.shared.saveContext()
+
+        }
+        
+        
     }
     
     
     @objc func buttonTapped(_ sender: UIButton){
         print(sender.tag)
         var dataToShare = " "
-        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].author ?? "" ) as String)")
+        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].url ?? "" ) as String)")
         
         let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
 //            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
@@ -275,14 +305,17 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     
 }
 extension MainNewsViewController:UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var itemWidth = collectionView.bounds.width
         var itemHeight = collectionView.bounds.height
+        
         if collectionView == categoryCollectionView{
             itemWidth = collectionView.bounds.width - 5
             itemHeight = collectionView.bounds.height - 5
             print(collectionView)
         }
+        
             return CGSize(width: itemWidth, height: itemHeight)
         }
     

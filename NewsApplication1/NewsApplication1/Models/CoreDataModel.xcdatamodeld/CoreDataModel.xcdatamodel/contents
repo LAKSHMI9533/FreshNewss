@@ -11,6 +11,12 @@
         <attribute name="userName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Marked" representedClassName="Marked" syncable="YES" codeGenerationType="class">
-        <attribute name="news" optional="YES" attributeType="Transformable"/>
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="context" optional="YES" attributeType="String"/>
+        <attribute name="descript12" optional="YES" attributeType="String"/>
+        <attribute name="publishedAt" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="urlToImage" optional="YES" attributeType="String"/>
     </entity>
 </model>

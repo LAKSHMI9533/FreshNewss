@@ -103,4 +103,30 @@ class Networking{
         }
     }
 }
+var cacheData = NSCache<AnyObject,AnyObject>()
 
+func apiCallForImage(uurl : String)->Future<UIImage,Error>{
+    Future{ promice in
+        if let url = URL(string: uurl){
+            if let imageCache = cacheData.object(forKey: url.absoluteString as AnyObject) as? UIImage{
+                promice(.success(imageCache))
+            }
+            var imgTask = URLSession(configuration:.default).dataTask(with: url) { Data, urlresponce, error in
+                if let data = Data{
+                    do{
+                        if let reData = try UIImage(data: data){
+                            cacheData.setObject(reData, forKey: url.absoluteString as AnyObject)
+                            promice(.success(reData))
+                        }
+                    } catch {
+                        print(error)
+                    }
+                } else {
+                    promice(.failure(error!))
+                }
+            }.resume()
+        } else {
+            print("unable to convert string to url\(uurl)")
+        }
+    }
+}

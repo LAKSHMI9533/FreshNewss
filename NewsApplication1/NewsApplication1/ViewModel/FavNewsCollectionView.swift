@@ -18,7 +18,7 @@ class FavNewsCollectionViewController: UIViewController{
     var arrayforfav : [Responce] = []
     var arrayforfav1 : [results] = []
     var coount = 0
-    
+    var model = FavCollectionViewModel()
     override func viewDidLoad() {
         favNewsCollection.delegate = self
         favNewsCollection.dataSource = self
@@ -51,6 +51,74 @@ class FavNewsCollectionViewController: UIViewController{
             }.store(in: &can)
         }
     }
+    @objc func MarkedButtonTapped(_ sender:UIButton){
+        let image1 = UIImage(systemName: "square.and.arrow.down")
+        let image2 = UIImage(systemName: "square.and.arrow.down.fill")
+
+        let buttond = sender
+        if buttond.currentImage == image2{
+            var aa = model.fetching(titleToSearch: arrayforfav1[sender.tag].title!)
+            print(aa)
+            if aa != nil{
+                model.DeleteOperation(ob: aa.first!)
+            }
+            sender.setImage(image1, for: UIControl.State.normal)
+            
+        }else{
+
+            sender.setImage(image2, for: UIControl.State.normal)
+            let markedNews = Marked(context: PersistentStorage.shared.persistentContainer.viewContext)
+
+            markedNews.author = (arrayforfav1[sender.tag].author ?? "") as String
+            markedNews.context = (arrayforfav1[sender.tag].content ?? "") as String
+            markedNews.descript12 = (arrayforfav1[sender.tag].description ?? "") as String
+            markedNews.publishedAt = (arrayforfav1[sender.tag].publishedAt ?? "") as String
+            markedNews.title = (arrayforfav1[sender.tag].title ?? "") as String
+            markedNews.url = (arrayforfav1[sender.tag].url ?? "") as String
+            markedNews.urlToImage = (arrayforfav1[sender.tag].urlToImage ?? "") as String
+            PersistentStorage.shared.saveContext()
+
+        }
+        
+        
+    }
+    @objc func buttonTapped(_ sender: UIButton){
+        print(sender.tag)
+        var dataToShare = " "
+        dataToShare.append("Articles: \((arrayforfav1[sender.tag].url ?? "" ) as String)")
+        
+        let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
+//            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
+        let button = sender as UIView
+//        let cell = button.nearestAncestor(ofType: CollectionViewCell.self),
+
+        activityVC.popoverPresentationController?.sourceView = sender.superview
+
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                activityVC.modalPresentationStyle = .overFullScreen
+            }
+                
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
+
+                activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            }
+
+        present(activityVC, animated: true, completion: nil)
+
+            activityVC.completionWithItemsHandler = { [weak self](activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+
+                // 5. set the activityVC to nil after the user is done
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.activityVC = nil
+//                }
+         //   }
+        }
+    }
 }
 
 
@@ -66,6 +134,20 @@ extension FavNewsCollectionViewController:UICollectionViewDelegate,UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = favNewsCollection.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        cell.shareButton.tag = indexPath.row
+        cell.markedButton.tag = indexPath.row
+        cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
+                                   , for: UIControl.State.normal)
+        var fetchingResponce = model.fetching(titleToSearch: arrayforfav1[indexPath.row].title!)
+        if fetchingResponce.isEmpty {
+            cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down")
+                                       , for: UIControl.State.normal)
+        }else{
+            cell.markedButton.setImage(UIImage(systemName: "square.and.arrow.down.fill")
+                                       , for: UIControl.State.normal)
+        }
+        cell.shareButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        cell.markedButton.addTarget(self, action: #selector(MarkedButtonTapped(_:)), for: .touchUpInside)
         return cell
     }
     

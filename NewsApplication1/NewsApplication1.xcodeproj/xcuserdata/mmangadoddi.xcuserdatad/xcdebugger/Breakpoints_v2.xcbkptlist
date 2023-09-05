@@ -190,10 +190,199 @@
             filePath = "NewsApplication1/ViewModel/MainNewsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "MainNewsViewController"
-            landmarkType = "21">
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "buttonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C9918EEC-7A23-437C-938D-845DD5720780 - cb82fca858ad0bf3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.buttonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "C9918EEC-7A23-437C-938D-845DD5720780 - cb82fca858ad0da6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.buttonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "175"
+                  endingLineNumber = "175"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "C9918EEC-7A23-437C-938D-845DD5720780 - cb82fca858ad0d87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.buttonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C5BC08E0-9808-4DA9-85B8-94563CE2053E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsApplication1/ViewModel/MainNewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "MarkedButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C5BC08E0-9808-4DA9-85B8-94563CE2053E - ab926e9d8bf1913c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "844">
+               </Location>
+               <Location
+                  uuid = "C5BC08E0-9808-4DA9-85B8-94563CE2053E - ab926e9d8bf1af0e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "2040">
+               </Location>
+               <Location
+                  uuid = "C5BC08E0-9808-4DA9-85B8-94563CE2053E - ab926e9d8bf1af6f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "1748">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "37070324-03B6-45E7-81C4-4F6A59C6542E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsApplication1/ViewModel/MainNewsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "MarkedButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "37070324-03B6-45E7-81C4-4F6A59C6542E - ab926e9d8bf1ae40"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1296">
+               </Location>
+               <Location
+                  uuid = "37070324-03B6-45E7-81C4-4F6A59C6542E - ab926e9d8bf1acf3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "2368">
+               </Location>
+               <Location
+                  uuid = "37070324-03B6-45E7-81C4-4F6A59C6542E - ab926e9d8bf1accc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NewsApplication1.MainNewsViewController.MarkedButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "NewsApplication1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmangadoddi/Desktop/udemy/FreshNewss/NewsApplication1/NewsApplication1/ViewModel/MainNewsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "2076">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F4E6028-F31E-42DC-8B28-C4A69AE17BB4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NewsApplication1/ViewModel/MarkedNews.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "ClearAllButton(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
