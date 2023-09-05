@@ -60,7 +60,7 @@ class MarkedNews : UIViewController{
     @objc func buttonTapped(_ sender: UIButton){
         print(sender.tag)
         var dataToShare = " "
-        dataToShare.append("Articles: \((result1?[sender.tag].author ?? "" ) as String)")
+        dataToShare.append("Articles: \((result1?[sender.tag].url ?? "" ) as String)")
         
         let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
         let button = sender as UIView

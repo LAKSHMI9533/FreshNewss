@@ -21,7 +21,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="egg-Ag-b9e">
                         <rect key="frame" x="5" y="5" width="350" height="558"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="michal-grosicki-235026" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-ia-tTJ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-ia-tTJ">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="271.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hcu-RM-uFf" userLabel="Stack View2">
@@ -97,7 +97,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="michal-grosicki-235026" width="4592" height="3448"/>
+        <image name="download" width="225" height="225"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
     </resources>
 </document>

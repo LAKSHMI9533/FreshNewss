@@ -173,7 +173,7 @@ extension MainNewsViewController:UICollectionViewDelegate,UICollectionViewDataSo
     @objc func buttonTapped(_ sender: UIButton){
         print(sender.tag)
         var dataToShare = " "
-        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].url ?? "" ) as String)")
+        dataToShare.append("Articles: \((decodedResponce.articles[sender.tag].url ?? "\(decodedResponce.articles[sender.tag].content)" ) as String)")
         
         let activityVC = UIActivityViewController(activityItems: [dataToShare], applicationActivities: nil)
 //            activityVC.excludedActivityTypes = [.addToReadingList, .openInIBooks, .print]
