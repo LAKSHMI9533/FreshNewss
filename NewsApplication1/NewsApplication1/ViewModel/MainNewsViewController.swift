@@ -138,7 +138,7 @@ class MainNewsViewController: UIViewController {
                 activityVC.modalPresentationStyle = .overFullScreen
             }
             if UIDevice.current.userInterfaceIdiom == .pad {
-                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
+                activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width , y: UIScreen.main.bounds.height/2 , width: 0, height: 0)
                 activityVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
             }
         present(activityVC, animated: true, completion: nil)

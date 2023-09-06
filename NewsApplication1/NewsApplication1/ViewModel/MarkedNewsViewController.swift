@@ -127,6 +127,15 @@ extension MarkedNewsViewController : UICollectionViewDelegate,UICollectionViewDa
             }
         }
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "webViewController") as! WebViewController
+        vc.urlForNews = "\((result1?[indexPath.row].url ?? "notfound url") as String)"
+        if let vcc = vc.presentationController as? UISheetPresentationController{
+            vcc.detents = [.medium(),.large()]
+        }
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = savedCollectionView.bounds.width
